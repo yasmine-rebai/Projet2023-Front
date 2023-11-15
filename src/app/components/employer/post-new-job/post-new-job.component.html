@@ -1,0 +1,168 @@
+<section class="space-ptb bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="section-title text-center">
+            <h2 class="text-primary">Update Post</h2>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class=" justify-content-center">
+            <ul class="nav nav-tabs nav-tabs-03 justify-content-center d-sm-flex d-block text-center" id="myTab"
+              role="tablist">
+              <li class="flex-fill">
+                <div class="cover-photo-contact">
+                  <div class="cover-photo">
+                    <img class="img-fluid " style="width: 200px;" src="http://localhost:8080/users/files/{{Offre.logo}}" alt="">
+  
+                  </div><br>
+  
+                  <!-- <form [formGroup]="formImage">
+                    <label class="file">
+                      <input type="file" (change)="handleFileInput($event)">
+                      <span class="file-custom"></span>
+                    </label><br>
+                    <a style="margin: 20px;" (click)="updateLogo()" class="btn btn-md btn-outline-primary">Update Logo</a>
+  
+                  </form> -->
+                </div>
+  
+  
+              </li>
+  
+  
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <form  [formGroup]="formoffer" (ngSubmit)="updateOffer()"  #f=ngForm>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="user-dashboard-info-box">
+  
+              <div class="row">
+                <div class="col-12">
+                  <form class="row">
+                    <div class="form-group mt-0 mb-3 col-md-12">
+                      <label class="form-label">offer Title</label>
+                      <input type="text" name="titleoffer" class="form-control" [(ngModel)]="Offre.titleoffer" required
+                       >
+                     
+                    </div>
+                    <div class="form-group mt-0 mb-3 col-md-12">
+                      <label class="form-label">Description</label>
+                      <textarea class="form-control" name="descriptionoffer" rows="4" [(ngModel)]="Offre.descriptionoffer" required
+                        #descriptionoffer="ngModel"></textarea>
+                      <span style="color: red" *ngIf="!descriptionoffer.valid && descriptionoffer.touched"> N'oubliez pas
+                        description</span>
+                    </div>
+  
+                    <div class="form-group col-md-6 mb-3">
+                      <label class="form-label">Email Address</label>
+                      <input type="email" name="email" class="form-control" [(ngModel)]="Offre.email" required
+                        #email="ngModel">
+                      <span style="color: red" *ngIf="!email.valid && email.touched"> N'oubliez pas email</span>
+                    </div>
+  
+                    <div class="form-group mt-0 mb-3 col-md-6 select-border">
+                      <label class="form-label">Application Deadline</label>
+                      <input type="date" name="datelimite" class="form-control" [(ngModel)]="Offre.datelimite" required
+                        #datelimite="ngModel">
+                      <span style="color: red" *ngIf="!datelimite.valid && datelimite.touched"> N'oubliez pas Deadline</span>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                      <label class="form-label">Duration:</label>
+                      <input type="text" name="duree" class="form-control" [(ngModel)]="Offre.duree" required
+                        #duree="ngModel">
+                      <span style="color: red" *ngIf="!duree.valid && duree.touched"> N'oubliez pas Duration</span>
+                    </div>
+                    <div class="form-group col-md-4 select-border mb-3">
+                      <label class="form-label">offer Sector:</label>
+  
+                      <!-- <input type="text" name="sector" class="form-control" [(ngModel)]="Offre.categorie.titlecategorie" required
+                        #sector="ngModel"> -->
+                        <select class="form-control basic-select" id="sector" name="sector" 
+                        [(ngModel)]="Offre.categorie.titlecategorie" required #sector="ngModel">
+                        <option [selected]="true" [value]="Offre.categorie.titlecategorie">{{Offre.categorie.titlecategorie}}</option>
+                        <option *ngFor="let categorie of categories" [value]="categorie.titlecategorie">{{categorie.titlecategorie}} </option>
+                        </select>
+                      <span style="color: red" *ngIf="!sector.valid && sector.touched"> N'oubliez pas sector</span>
+                    </div>
+                    <div class="form-group col-md-4 select-border mb-3">
+                      <label class="form-label">offer Type*:</label>
+                      <select class="form-control basic-select" id="contract_type" name="contract_type"
+                        [(ngModel)]="Offre.contract_type" required #contract_type="ngModel">
+                        <option [selected]="true" [value]="Offre.contract_type">{{Offre.contract_type}}</option>
+                        <option value="full-time">full-time</option>
+                        <option value="part-time">part-time</option>
+                        <option value="freelance">freelance</option>
+                        <option value="temporary">temporary</option>
+                      </select>
+                      <span style="color: red" *ngIf="!contract_type.valid && contract_type.touched"> N'oubliez pas
+                        contract_type</span>
+                    </div>
+                   
+                    
+                  <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">salary:</label>
+                    <input type="text" name="salary" class="form-control" [(ngModel)]="Offre.salary" required
+                      #salary="ngModel">
+                    <span style="color: red" *ngIf="!salary.valid && salary.touched"> N'oubliez pas salary</span>
+                  </div>
+                  <div class="form-group col-md-6 mb-3">
+                  <label class="mb-2">currency</label>
+
+                  <select class="form-control basic-select" id="currency" name="currency"
+                  [(ngModel)]="Offre.currency" required #currency="ngModel">
+                  <option [selected]="true" [value]="Offre.currency">{{Offre.currency}}</option>
+                  <option value="European Euro (EUR)">European Euro(EUR)</option>
+                  <option value="Japanese Yen (JPY)">Japanese Yen(JPY)</option>
+                  <option value="British Pound (GBP)">British Pound(GBP)</option>
+                  <option value="Swiss Franc (CHF)">Swiss Franc(CHF)</option>
+                  <option value="Canadian Dollar (CAD)">Canadian Dollar(CAD)</option>
+                  <option value="Australian Dollar">Australian Dollar</option>
+                </select>
+                <span style="color: red" *ngIf="!currency.valid && currency.touched"> N'oubliez pas
+                  currency</span>
+                </div>
+                <div class="form-group col-md-6  mb-3">
+                  <label class="form-label">Experience*:</label>
+                  <select class="form-control basic-select" id="experience" name="experience"
+                    [(ngModel)]="Offre.experience" required #experience="ngModel">
+                    <option [selected]="true" [value]="Offre.experience">{{Offre.experience}}</option>
+                    <option >9M Experience</option>
+                    <option >1Y Experience</option>
+                    <option >2Y Experience</option>
+                    <option >5Y Experience</option>
+                    <option >6M Experience</option>
+                  </select>
+                  <span style="color: red" *ngIf="!experience.valid && experience.touched"> N'oubliez pas
+                    experience</span>
+                </div>
+                <div class="form-group col-md-6  mb-3">
+                  <label class="form-label">profil</label>
+                  <input type="text" name="profil" class="form-control" [(ngModel)]="Offre.profil" required
+                    #profil="ngModel">
+                  <span style="color: red" *ngIf="!profil.valid && profil.touched"> N'oubliez pas profil</span>
+                </div>
+                <div class="form-group col-md-6  mb-md-0 mb-3">
+                  <label class="form-label">skills</label>
+                  <input type="text" name="skill" class="form-control" [(ngModel)]="Offre.skill" required
+                    #skill="ngModel">
+                  <span style="color: red" *ngIf="!skill.valid && skill.touched"> N'oubliez pas profil</span>
+                </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid ">Modifier</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>

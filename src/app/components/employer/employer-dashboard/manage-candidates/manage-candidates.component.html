@@ -1,0 +1,72 @@
+
+<!--Manage Candidates -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="user-dashboard-info-box table-responsive pb-4 mb-0">
+          <h4>application accepted  </h4>
+              <div class="user-dashboard-info-box" *ngFor="let offer of offers  ; let i =index" l >
+                <div class="dashboard-resume-title d-flex align-items-center">
+                  <div class="section-title-02 mb-sm-0" >
+                    <h5 >{{offer.titleoffer}}</h5>
+                  </div>
+                  <a *ngIf="offer.Candidatures.length==0"  (click)="ifEmpty()" class="btn btn-md ms-sm-auto btn-primary collapsed" data-bs-toggle="collapse" href="#dateposted-0{{i+2}}" role="button" aria-expanded="false" aria-controls="dateposted" >manage applications</a>
+                  <a *ngIf="offer.Candidatures.length>0" class="btn btn-md ms-sm-auto btn-primary collapsed" data-bs-toggle="collapse" href="#dateposted-0{{i+2}}" role="button" aria-expanded="false" aria-controls="dateposted" >manage applications</a>
+
+                </div>
+                <div class="collapse" id="dateposted-0{{i+2}}" >
+                  <div class="bg-light p-3 mt-4"  *ngIf="offer.Candidatures.length>0 ">
+                    <form class="row" >
+                      <div class="col-12" *ngFor="let c of offer.Candidatures | paginate : {itemsPerPage: pageSize, currentPage: page, totalItems: count}">
+                        <div class="job-list" *ngIf="c.status == 'Accepted'">
+                          <div class="job-list-logo">
+                            <img class="img-fluid" src="http://localhost:8080/users/files/{{c.candidat.image}}" alt="">
+                          </div>
+                          <div class="job-list-details">
+                            <div class="job-list-info">
+                              <div class="job-list-title">
+                                <h5 class="mb-0"><a>{{c.candidat.firstName}} {{c.candidat.lastName}}</a></h5>
+                               
+                              </div>
+                              <div class="job-list-option">
+                                <ul class="list-unstyled">
+                                  <li> <span>via</span> <a href="employer-detail.html"> {{offer.titleoffer}}</a> </li>
+                                  <li><i class="fas fa-map-marker-alt pe-1"></i> {{offer.city.city}}, {{offer.city.country}} </li>
+                                  <li><i class="fas fa-filter pe-1"></i>{{offer.categorie.titlecategorie}}</li>
+                                  <li><a class="{{offer.contract_type}}" ><i class="fas fa-suitcase pe-1"></i>{{offer.contract_type}}</a></li>
+                                   <div style="margin-left:150px"> <button  (click)="refuseCandidature(c,c.id)" class="btn btn-danger btn-xs">Reject</button></div> 
+                                   <a  style="margin-left:80px" href="{{c.lien}}">RDV</a>
+                                </ul>
+                              </div>
+                            </div>
+          
+                          </div>
+                          <div >
+                          <div class="col-12" >
+                            <!-- <button (click)="acceptCandidature(c,c.id)"  class="btn btn-success btn-xs" >Accept</button>
+                            <button (click)="refuseCandidature(c,c.id)"  class="btn btn-danger btn-xs">Reject</button> -->
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>   
+              <div class="row">
+                <div class="col-12 text-center mt-0">
+                  <div >
+                  <div class="page-link b-radius-none" >
+                    <pagination-controls  class="pagination justify-content-center" previousLabel="Prev" nextLabel="Next"
+                      [responsive]="true" (pageChange)="handlePageChange($event)"></pagination-controls>
+                  </div>
+                </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Manage Candidates -->
